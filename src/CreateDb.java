@@ -3,6 +3,8 @@ import java.sql.DriverManager;
 import java.sql.SQLException;
 import java.sql.Statement;
 
+// this is the test for github
+
 public class CreateDb {
     public static void main(String[] args) {
         String url = "jdbc:mysql://localhost:3306/";
