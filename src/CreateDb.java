@@ -5,6 +5,7 @@ import java.sql.Statement;
 
 // this is the test for github
 
+//this is the second test
 public class CreateDb {
     public static void main(String[] args) {
         String url = "jdbc:mysql://localhost:3306/";
