@@ -69,23 +69,22 @@ public class Withdrawal extends JFrame implements ActionListener {
             if (amount.equals("")) {
                 JOptionPane.showMessageDialog(null, "Please enter the amount you want to deposit");
             }
-            Conn conn = new Conn();
-            ResultSet rs = conn.s.executeQuery("select * from bank where pin ='" + pinnumber + "'");
-            int balance = 0;
-            while (rs.next()) {
-                if (rs.getString("type").equals("Deposit")) {
-                    balance += Integer.parseInt(rs.getString("amount"));
-                } else {
-                    balance -= Integer.parseInt(rs.getString("amount"));
+            try {
+                Conn conn = new Conn();
+                ResultSet rs = conn.s.executeQuery("select * from bank where pin ='" + pinnumber + "'");
+                int balance = 0;
+                while (rs.next()) {
+                    if (rs.getString("type").equals("Deposit")) {
+                        balance += Integer.parseInt(rs.getString("amount"));
+                    } else {
+                        balance -= Integer.parseInt(rs.getString("amount"));
+                    }
                 }
-            }
-            if (ae.getSource() != withdrawal && balance < Integer.parseInt(amount)) {
-                JOptionPane.showMessageDialog(null, "Insufficient Balance");
-                return;
-            } else {
-                try {
+                if (ae.getSource() != back && balance < Integer.parseInt(amount)) {
+                    JOptionPane.showMessageDialog(null, "Insufficient Balance");
+                    return;
+                } else {
 
-                    Conn conn = new Conn();
                     String query = " insert into bank values('" + pinnumber + "','" + date + "','Withdrawl','" + amount
                             + "')";
                     conn.s.executeUpdate(query);
@@ -93,11 +92,10 @@ public class Withdrawal extends JFrame implements ActionListener {
                     setVisible(false);
                     new Transaction(pinnumber).setVisible(true);
 
-                } catch (Exception e) {
-                    System.out.println(e);
                 }
+            } catch (Exception e) {
+                System.out.println(e);
             }
-
         } else if (ae.getSource() == back) {
             setVisible(false);
             new Transaction(pinnumber).setVisible(true);
