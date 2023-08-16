@@ -21,7 +21,7 @@ public class MiniStatement extends JFrame {
         add(bankname);
 
         JLabel mini = new JLabel();
-        mini.setBounds(20, 100, 400, 200);
+        mini.setBounds(20, 150, 400, 200);
         // mini.setFont(new Font("Raleway", Font.BOLD, 14));
         add(mini);
 
